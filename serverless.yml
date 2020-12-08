@@ -1,0 +1,30 @@
+# Welcome to Serverless!
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: meta-fetcher
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-south-1
+
+package:
+ exclude:
+    - tests/**
+    - node_modules/.cache/**
+    - node_modules/puppeteer/.local-chromium/**
+    - package.json
+    - package-lock.json
+
+functions:
+  meta-fetcher:
+    handler: handler.meta_fetcher
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
